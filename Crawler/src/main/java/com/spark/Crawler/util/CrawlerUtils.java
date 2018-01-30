@@ -25,13 +25,14 @@ public class CrawlerUtils {
 	}
 
 	public void getUrlLinks(String url,int count) {
-		if(!urlArray.contains(url) && count<depth) {
+		if(!urlArray.contains(url) && count<=depth) {
 		try {
 			urlArray.add(url);
 			Document htmlDoc=Jsoup.connect(url).get();
 			Elements links = htmlDoc.select("a[href]");
 			count++;
 			for (Element page : links) {
+				System.out.println(page.attr("abs:href"));
 				CrawlThread crawlThread=new CrawlThread(page.attr("abs:href"), count);
 				crawlThread.start();
 				crawlThread.join();
@@ -41,12 +42,12 @@ public class CrawlerUtils {
 		}
 	}
 	}
-	public static void main(String[] args) {
-		CrawlerUtils crawlerUtils=new CrawlerUtils();
-		CrawlerUtils.setDepth(0);
-		urlArray.add("https://www.javatpoint.com");
-		crawlerUtils.getUrlLinks("https://www.javatpoint.com",0);
-		System.out.println(urlArray);
-		System.out.println(urlArray.size());
-	}
+//	public static void main(String[] args) {
+//		CrawlerUtils crawlerUtils=new CrawlerUtils();
+//		CrawlerUtils.setDepth(0);
+//		urlArray.add("https://www.javatpoint.com");
+//		crawlerUtils.getUrlLinks("https://www.javatpoint.com",0);
+//		System.out.println(urlArray);
+//		System.out.println(urlArray.size());
+//	}
 }
