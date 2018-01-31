@@ -3,6 +3,7 @@ package com.spark.spring.crawler.main.controllers;
 
 import org.json.JSONArray;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import com.spark.crawler.util.CrawlerUtils;
 
 @RestController
 public class CrawlerService {
-	@RequestMapping("/crawl")
+	@RequestMapping(value="/crawl", method = RequestMethod.GET)
 	public @ResponseBody String getCrawlerResponse(@RequestParam("url") String url,@RequestParam("depth") int depth){
 		CrawlerUtils crawlerUtils=new CrawlerUtils();
 		CrawlerUtils.setDepth(depth);		
