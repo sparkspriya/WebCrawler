@@ -1,4 +1,4 @@
-package com.spark.Crawler.util;
+package com.spark.crawler.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,22 +32,16 @@ public class CrawlerUtils {
 			Elements links = htmlDoc.select("a[href]");
 			count++;
 			for (Element page : links) {
+				if(count<=depth) {
 				System.out.println(page.attr("abs:href"));
 				CrawlThread crawlThread=new CrawlThread(page.attr("abs:href"), count);
 				crawlThread.start();
 				crawlThread.join();
+				}
             }
 		} catch (IOException|InterruptedException e) {
 			System.out.println("Exception in processing url:"+url+" message:"+e.getMessage());
 		}
 	}
 	}
-//	public static void main(String[] args) {
-//		CrawlerUtils crawlerUtils=new CrawlerUtils();
-//		CrawlerUtils.setDepth(0);
-//		urlArray.add("https://www.javatpoint.com");
-//		crawlerUtils.getUrlLinks("https://www.javatpoint.com",0);
-//		System.out.println(urlArray);
-//		System.out.println(urlArray.size());
-//	}
 }

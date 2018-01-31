@@ -1,4 +1,4 @@
-package com.spark.Crawler.util;
+package com.spark.crawler.util;
 
 public class CrawlThread extends Thread{
 CrawlerUtils crawlerUtils=new CrawlerUtils();
